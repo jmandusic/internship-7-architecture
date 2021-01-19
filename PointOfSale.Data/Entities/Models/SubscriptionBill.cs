@@ -7,6 +7,8 @@ namespace PointOfSale.Data.Entities.Models
     public class SubscriptionBill
     {
         public int Id { get; set; }
+        public DateTime StartOfRent { get; set; }
+        public DateTime EndOfRent { get; set; }
 
         public int OfferId { get; set; }
         public Offer Offer { get; set; }

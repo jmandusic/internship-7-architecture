@@ -10,7 +10,7 @@ using PointOfSale.Data.Entities;
 namespace PointOfSale.Data.Migrations
 {
     [DbContext(typeof(PointOfSaleDbContext))]
-    [Migration("20210116155825_InitialDatabase")]
+    [Migration("20210118191700_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 1,
                             BillType = 0,
-                            PurchasedOn = new DateTime(2021, 1, 16, 16, 58, 24, 985, DateTimeKind.Local).AddTicks(8354),
+                            PurchasedOn = new DateTime(2021, 1, 18, 20, 16, 59, 357, DateTimeKind.Local).AddTicks(6571),
                             TotalPrice = 25m,
                             isCancelled = false
                         },
@@ -58,7 +58,7 @@ namespace PointOfSale.Data.Migrations
                             Id = 2,
                             BillType = 0,
                             PurchasedOn = new DateTime(2021, 1, 7, 12, 45, 0, 0, DateTimeKind.Unspecified),
-                            TotalPrice = 1500m,
+                            TotalPrice = 5m,
                             isCancelled = false
                         },
                         new
@@ -66,7 +66,7 @@ namespace PointOfSale.Data.Migrations
                             Id = 3,
                             BillType = 0,
                             PurchasedOn = new DateTime(2021, 1, 3, 9, 35, 0, 0, DateTimeKind.Unspecified),
-                            TotalPrice = 5m,
+                            TotalPrice = 1500m,
                             isCancelled = false
                         },
                         new
@@ -89,7 +89,7 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 6,
                             BillType = 2,
-                            PurchasedOn = new DateTime(2021, 1, 16, 16, 58, 24, 988, DateTimeKind.Local).AddTicks(8827),
+                            PurchasedOn = new DateTime(2021, 1, 18, 20, 16, 59, 360, DateTimeKind.Local).AddTicks(6065),
                             TotalPrice = 710m,
                             isCancelled = false
                         },
@@ -312,9 +312,6 @@ namespace PointOfSale.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OfferId");
@@ -327,24 +324,21 @@ namespace PointOfSale.Data.Migrations
                             Id = 1,
                             Name = "cake",
                             OfferId = 1,
-                            Price = 25m,
-                            Quantity = 1
+                            Price = 25m
                         },
                         new
                         {
                             Id = 2,
-                            Name = "TV",
+                            Name = "shampoo",
                             OfferId = 2,
-                            Price = 25m,
-                            Quantity = 1
+                            Price = 5m
                         },
                         new
                         {
                             Id = 3,
-                            Name = "shampoo",
+                            Name = "TV",
                             OfferId = 3,
-                            Price = 25m,
-                            Quantity = 1
+                            Price = 1500m
                         });
                 });
 
@@ -495,9 +489,6 @@ namespace PointOfSale.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("EndOfRent")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -506,9 +497,6 @@ namespace PointOfSale.Data.Migrations
 
                     b.Property<decimal>("PricePerHour")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("StartOfRent")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -520,29 +508,23 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 1,
-                            EndOfRent = new DateTime(2021, 1, 3, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rent professional kitchen",
                             OfferId = 7,
-                            PricePerHour = 80m,
-                            StartOfRent = new DateTime(2021, 1, 3, 11, 30, 0, 0, DateTimeKind.Unspecified)
+                            PricePerHour = 80m
                         },
                         new
                         {
                             Id = 2,
-                            EndOfRent = new DateTime(2021, 1, 28, 23, 45, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rent washing machine",
                             OfferId = 8,
-                            PricePerHour = 30m,
-                            StartOfRent = new DateTime(2021, 1, 28, 21, 30, 0, 0, DateTimeKind.Unspecified)
+                            PricePerHour = 30m
                         },
                         new
                         {
                             Id = 3,
-                            EndOfRent = new DateTime(2021, 2, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rent computer",
                             OfferId = 9,
-                            PricePerHour = 25m,
-                            StartOfRent = new DateTime(2021, 2, 10, 13, 30, 0, 0, DateTimeKind.Unspecified)
+                            PricePerHour = 25m
                         });
                 });
 
@@ -562,9 +544,6 @@ namespace PointOfSale.Data.Migrations
                     b.Property<decimal>("PricePerHour")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("ScheduledOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OfferId");
@@ -577,24 +556,21 @@ namespace PointOfSale.Data.Migrations
                             Id = 1,
                             Name = "Dinner by professional chef",
                             OfferId = 4,
-                            PricePerHour = 500m,
-                            ScheduledOn = new DateTime(2021, 1, 10, 20, 30, 0, 0, DateTimeKind.Unspecified)
+                            PricePerHour = 500m
                         },
                         new
                         {
                             Id = 2,
                             Name = "Cleaning toilets",
                             OfferId = 5,
-                            PricePerHour = 120m,
-                            ScheduledOn = new DateTime(2021, 1, 1, 13, 20, 0, 0, DateTimeKind.Unspecified)
+                            PricePerHour = 120m
                         },
                         new
                         {
                             Id = 3,
                             Name = "Fixing laptop",
                             OfferId = 6,
-                            PricePerHour = 355m,
-                            ScheduledOn = new DateTime(2021, 1, 30, 15, 0, 0, 0, DateTimeKind.Unspecified)
+                            PricePerHour = 355m
                         });
                 });
 
@@ -614,6 +590,9 @@ namespace PointOfSale.Data.Migrations
                     b.Property<int>("OfferId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ScheduledOn")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BillId");
@@ -630,21 +609,24 @@ namespace PointOfSale.Data.Migrations
                             Id = 1,
                             BillId = 4,
                             EmployeeId = 1,
-                            OfferId = 4
+                            OfferId = 4,
+                            ScheduledOn = new DateTime(2021, 1, 10, 20, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             BillId = 5,
                             EmployeeId = 2,
-                            OfferId = 5
+                            OfferId = 5,
+                            ScheduledOn = new DateTime(2021, 1, 1, 13, 20, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             BillId = 6,
                             EmployeeId = 1,
-                            OfferId = 6
+                            OfferId = 6,
+                            ScheduledOn = new DateTime(2021, 1, 30, 15, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -661,8 +643,14 @@ namespace PointOfSale.Data.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EndOfRent")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("OfferId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartOfRent")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -680,21 +668,27 @@ namespace PointOfSale.Data.Migrations
                             Id = 1,
                             BillId = 7,
                             CustomerId = 1,
-                            OfferId = 7
+                            EndOfRent = new DateTime(2021, 1, 3, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            OfferId = 7,
+                            StartOfRent = new DateTime(2021, 1, 3, 11, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             BillId = 8,
                             CustomerId = 2,
-                            OfferId = 8
+                            EndOfRent = new DateTime(2021, 1, 28, 23, 45, 0, 0, DateTimeKind.Unspecified),
+                            OfferId = 8,
+                            StartOfRent = new DateTime(2021, 1, 28, 21, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             BillId = 9,
                             CustomerId = 1,
-                            OfferId = 9
+                            EndOfRent = new DateTime(2021, 2, 10, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            OfferId = 9,
+                            StartOfRent = new DateTime(2021, 2, 10, 13, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -711,6 +705,9 @@ namespace PointOfSale.Data.Migrations
                     b.Property<int>("OfferId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BillId");
@@ -724,19 +721,22 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 1,
                             BillId = 1,
-                            OfferId = 1
+                            OfferId = 1,
+                            Quantity = 1
                         },
                         new
                         {
                             Id = 2,
                             BillId = 2,
-                            OfferId = 2
+                            OfferId = 2,
+                            Quantity = 1
                         },
                         new
                         {
                             Id = 3,
                             BillId = 3,
-                            OfferId = 3
+                            OfferId = 3,
+                            Quantity = 1
                         });
                 });
 

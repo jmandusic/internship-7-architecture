@@ -102,7 +102,6 @@ namespace PointOfSale.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -150,8 +149,6 @@ namespace PointOfSale.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartOfRent = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndOfRent = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -172,6 +169,7 @@ namespace PointOfSale.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ScheduledOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false),
                     BillId = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
@@ -206,7 +204,6 @@ namespace PointOfSale.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ScheduledOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -227,6 +224,8 @@ namespace PointOfSale.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    StartOfRent = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndOfRent = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false),
                     BillId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
@@ -260,6 +259,7 @@ namespace PointOfSale.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false),
                     BillId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -285,12 +285,12 @@ namespace PointOfSale.Data.Migrations
                 columns: new[] { "Id", "BillType", "PurchasedOn", "TotalPrice", "isCancelled" },
                 values: new object[,]
                 {
-                    { 1, 0, new DateTime(2021, 1, 16, 16, 58, 24, 985, DateTimeKind.Local).AddTicks(8354), 25m, false },
-                    { 2, 0, new DateTime(2021, 1, 7, 12, 45, 0, 0, DateTimeKind.Unspecified), 1500m, false },
-                    { 3, 0, new DateTime(2021, 1, 3, 9, 35, 0, 0, DateTimeKind.Unspecified), 5m, false },
+                    { 1, 0, new DateTime(2021, 1, 18, 20, 16, 59, 357, DateTimeKind.Local).AddTicks(6571), 25m, false },
+                    { 2, 0, new DateTime(2021, 1, 7, 12, 45, 0, 0, DateTimeKind.Unspecified), 5m, false },
+                    { 3, 0, new DateTime(2021, 1, 3, 9, 35, 0, 0, DateTimeKind.Unspecified), 1500m, false },
                     { 4, 2, new DateTime(2021, 1, 9, 15, 0, 0, 0, DateTimeKind.Unspecified), 1000m, false },
                     { 5, 2, new DateTime(2020, 12, 28, 17, 30, 0, 0, DateTimeKind.Unspecified), 180m, false },
-                    { 6, 2, new DateTime(2021, 1, 16, 16, 58, 24, 988, DateTimeKind.Local).AddTicks(8827), 710m, false },
+                    { 6, 2, new DateTime(2021, 1, 18, 20, 16, 59, 360, DateTimeKind.Local).AddTicks(6065), 710m, false },
                     { 7, 1, new DateTime(2021, 1, 2, 17, 45, 0, 0, DateTimeKind.Unspecified), 200m, false },
                     { 8, 1, new DateTime(2021, 1, 5, 13, 25, 0, 0, DateTimeKind.Unspecified), 67.5m, false },
                     { 9, 1, new DateTime(2021, 1, 18, 12, 45, 0, 0, DateTimeKind.Unspecified), 62.5m, false }
@@ -355,12 +355,12 @@ namespace PointOfSale.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Items",
-                columns: new[] { "Id", "Name", "OfferId", "Price", "Quantity" },
+                columns: new[] { "Id", "Name", "OfferId", "Price" },
                 values: new object[,]
                 {
-                    { 1, "cake", 1, 25m, 1 },
-                    { 2, "TV", 2, 25m, 1 },
-                    { 3, "shampoo", 3, 25m, 1 }
+                    { 1, "cake", 1, 25m },
+                    { 2, "shampoo", 2, 5m },
+                    { 3, "TV", 3, 1500m }
                 });
 
             migrationBuilder.InsertData(
@@ -381,52 +381,52 @@ namespace PointOfSale.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Rents",
-                columns: new[] { "Id", "EndOfRent", "Name", "OfferId", "PricePerHour", "StartOfRent" },
+                columns: new[] { "Id", "Name", "OfferId", "PricePerHour" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2021, 1, 28, 23, 45, 0, 0, DateTimeKind.Unspecified), "Rent washing machine", 8, 30m, new DateTime(2021, 1, 28, 21, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, new DateTime(2021, 1, 3, 14, 0, 0, 0, DateTimeKind.Unspecified), "Rent professional kitchen", 7, 80m, new DateTime(2021, 1, 3, 11, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2021, 2, 10, 16, 0, 0, 0, DateTimeKind.Unspecified), "Rent computer", 9, 25m, new DateTime(2021, 2, 10, 13, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, "Rent washing machine", 8, 30m },
+                    { 1, "Rent professional kitchen", 7, 80m },
+                    { 3, "Rent computer", 9, 25m }
                 });
 
             migrationBuilder.InsertData(
                 table: "ServiceBills",
-                columns: new[] { "Id", "BillId", "EmployeeId", "OfferId" },
+                columns: new[] { "Id", "BillId", "EmployeeId", "OfferId", "ScheduledOn" },
                 values: new object[,]
                 {
-                    { 1, 4, 1, 4 },
-                    { 2, 5, 2, 5 },
-                    { 3, 6, 1, 6 }
+                    { 1, 4, 1, 4, new DateTime(2021, 1, 10, 20, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 5, 2, 5, new DateTime(2021, 1, 1, 13, 20, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 6, 1, 6, new DateTime(2021, 1, 30, 15, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Services",
-                columns: new[] { "Id", "Name", "OfferId", "PricePerHour", "ScheduledOn" },
+                columns: new[] { "Id", "Name", "OfferId", "PricePerHour" },
                 values: new object[,]
                 {
-                    { 2, "Cleaning toilets", 5, 120m, new DateTime(2021, 1, 1, 13, 20, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, "Dinner by professional chef", 4, 500m, new DateTime(2021, 1, 10, 20, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Fixing laptop", 6, 355m, new DateTime(2021, 1, 30, 15, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, "Cleaning toilets", 5, 120m },
+                    { 1, "Dinner by professional chef", 4, 500m },
+                    { 3, "Fixing laptop", 6, 355m }
                 });
 
             migrationBuilder.InsertData(
                 table: "SubscriptionBills",
-                columns: new[] { "Id", "BillId", "CustomerId", "OfferId" },
+                columns: new[] { "Id", "BillId", "CustomerId", "EndOfRent", "OfferId", "StartOfRent" },
                 values: new object[,]
                 {
-                    { 1, 7, 1, 7 },
-                    { 2, 8, 2, 8 },
-                    { 3, 9, 1, 9 }
+                    { 1, 7, 1, new DateTime(2021, 1, 3, 14, 0, 0, 0, DateTimeKind.Unspecified), 7, new DateTime(2021, 1, 3, 11, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 8, 2, new DateTime(2021, 1, 28, 23, 45, 0, 0, DateTimeKind.Unspecified), 8, new DateTime(2021, 1, 28, 21, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 9, 1, new DateTime(2021, 2, 10, 16, 0, 0, 0, DateTimeKind.Unspecified), 9, new DateTime(2021, 2, 10, 13, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "TraditionalBills",
-                columns: new[] { "Id", "BillId", "OfferId" },
+                columns: new[] { "Id", "BillId", "OfferId", "Quantity" },
                 values: new object[,]
                 {
-                    { 3, 3, 3 },
-                    { 2, 2, 2 },
-                    { 1, 1, 1 }
+                    { 3, 3, 3, 1 },
+                    { 2, 2, 2, 1 },
+                    { 1, 1, 1, 1 }
                 });
 
             migrationBuilder.CreateIndex(

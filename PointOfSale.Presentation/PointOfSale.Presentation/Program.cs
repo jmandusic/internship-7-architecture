@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PointOfSale.Presentation.Actions;
+using PointOfSale.Presentation.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,8 @@ namespace PointOfSale.Presentation
     {
         static void Main(string[] args)
         {
-            
+            var mainMenuActions = MainMenuFactory.GetMainMenuActions();
+            mainMenuActions.PrintActionsAndCall();
         }
     }
 }

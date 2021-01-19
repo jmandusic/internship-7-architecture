@@ -236,24 +236,21 @@ namespace PointOfSale.Data.Seed
                        Id = 1,
                        OfferId = 1,
                        Name = "cake",
-                       Price = 25m,
-                       Quantity = 1
+                       Price = 25m
                    },
                    new Item
                    {
                        Id = 2,
                        OfferId = 2,
-                       Name = "TV",
-                       Price = 25m,
-                       Quantity = 1
+                       Name = "shampoo",
+                       Price = 5m
                    },
                    new Item
                    {
                        Id = 3,
                        OfferId = 3,
-                       Name = "shampoo",
-                       Price = 25m,
-                       Quantity = 1
+                       Name = "TV",
+                       Price = 1500m
                    }
                });
 
@@ -265,24 +262,21 @@ namespace PointOfSale.Data.Seed
                        Id = 1,
                        OfferId = 4,
                        Name = "Dinner by professional chef",
-                       PricePerHour = 500m,
-                       ScheduledOn = new DateTime(2021, 1, 10, 20, 30, 0)
+                       PricePerHour = 500m
                    },
                    new Service
                    {
                        Id = 2,
                        OfferId = 5,
                        Name = "Cleaning toilets",
-                       PricePerHour = 120m,
-                       ScheduledOn = new DateTime(2021, 1, 1, 13, 20, 0)
+                       PricePerHour = 120m
                    },
                    new Service
                    {
                        Id = 3,
                        OfferId = 6,
                        Name = "Fixing laptop",
-                       PricePerHour = 355m,
-                       ScheduledOn = new DateTime(2021, 1, 30, 15, 0, 0)
+                       PricePerHour = 355m
                    }
                });
 
@@ -294,27 +288,21 @@ namespace PointOfSale.Data.Seed
                        Id = 1,
                        OfferId = 7,
                        Name = "Rent professional kitchen",
-                       PricePerHour = 80m,
-                       StartOfRent = new DateTime(2021, 1, 3, 11, 30, 0),
-                       EndOfRent = new DateTime(2021, 1, 3, 14, 0, 0)
+                       PricePerHour = 80m
                    },
                    new Rent
                    {
                        Id = 2,
                        OfferId = 8,
                        Name = "Rent washing machine",
-                       PricePerHour = 30m,
-                       StartOfRent = new DateTime(2021, 1, 28, 21, 30, 0),
-                       EndOfRent = new DateTime(2021, 1, 28, 23, 45, 0)
+                       PricePerHour = 30m
                    },
                    new Rent
                    {
                        Id = 3,
                        OfferId = 9,
                        Name = "Rent computer",
-                       PricePerHour = 25m,
-                       StartOfRent = new DateTime(2021, 2, 10, 13, 30, 0),
-                       EndOfRent = new DateTime(2021, 2, 10, 16, 0, 0)
+                       PricePerHour = 25m
                    }
                });
 
@@ -333,7 +321,7 @@ namespace PointOfSale.Data.Seed
                    {
                        Id = 2,
                        BillType = TypeOfBill.Traditional,
-                       TotalPrice = 1500,
+                       TotalPrice = 5,
                        isCancelled = false,
                        PurchasedOn = new DateTime(2021, 1, 7, 12, 45, 0)
                    },
@@ -341,7 +329,7 @@ namespace PointOfSale.Data.Seed
                    {
                        Id = 3,
                        BillType = TypeOfBill.Traditional,
-                       TotalPrice = 5,
+                       TotalPrice = 1500,
                        isCancelled = false,
                        PurchasedOn = new DateTime(2021, 1, 3, 9, 35, 0)
                    },
@@ -402,19 +390,22 @@ namespace PointOfSale.Data.Seed
                    {
                        Id = 1,
                        OfferId = 1,
-                       BillId = 1
+                       BillId = 1,
+                       Quantity = 1
                    },
                    new TraditionalBill
                    {
                        Id = 2,
                        OfferId = 2,
-                       BillId = 2
+                       BillId = 2,
+                       Quantity = 1
                    },
                    new TraditionalBill
                    {
                        Id = 3,
                        OfferId = 3,
-                       BillId = 3
+                       BillId = 3,
+                       Quantity = 1
                    }
                });
 
@@ -424,6 +415,7 @@ namespace PointOfSale.Data.Seed
                    new ServiceBill
                    {
                        Id = 1,
+                       ScheduledOn = new DateTime(2021, 1, 10, 20, 30, 0),
                        OfferId = 4,
                        BillId = 4,
                        EmployeeId = 1
@@ -431,6 +423,7 @@ namespace PointOfSale.Data.Seed
                    new ServiceBill
                    {
                        Id = 2,
+                       ScheduledOn = new DateTime(2021, 1, 1, 13, 20, 0),
                        OfferId = 5,
                        BillId = 5,
                        EmployeeId = 2
@@ -438,6 +431,7 @@ namespace PointOfSale.Data.Seed
                    new ServiceBill
                    {
                        Id = 3,
+                       ScheduledOn = new DateTime(2021, 1, 30, 15, 0, 0),
                        OfferId = 6,
                        BillId = 6,
                        EmployeeId = 1
@@ -450,6 +444,8 @@ namespace PointOfSale.Data.Seed
                    new SubscriptionBill
                    {
                        Id = 1,
+                       StartOfRent = new DateTime(2021, 1, 3, 11, 30, 0),
+                       EndOfRent = new DateTime(2021, 1, 3, 14, 0, 0),
                        OfferId = 7,
                        BillId = 7,
                        CustomerId = 1
@@ -457,6 +453,8 @@ namespace PointOfSale.Data.Seed
                    new SubscriptionBill
                    {
                        Id = 2,
+                       StartOfRent = new DateTime(2021, 1, 28, 21, 30, 0),
+                       EndOfRent = new DateTime(2021, 1, 28, 23, 45, 0),
                        OfferId = 8,
                        BillId = 8,
                        CustomerId = 2
@@ -464,6 +462,8 @@ namespace PointOfSale.Data.Seed
                    new SubscriptionBill
                    {
                        Id = 3,
+                       StartOfRent = new DateTime(2021, 2, 10, 13, 30, 0),
+                       EndOfRent = new DateTime(2021, 2, 10, 16, 0, 0),
                        OfferId = 9,
                        BillId = 9,
                        CustomerId = 1

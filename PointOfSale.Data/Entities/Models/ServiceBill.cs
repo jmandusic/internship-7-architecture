@@ -7,6 +7,7 @@ namespace PointOfSale.Data.Entities.Models
     public class ServiceBill
     {
         public int Id { get; set; }
+        public DateTime ScheduledOn { get; set; }
 
         public int OfferId { get; set; }
         public Offer Offer { get; set; }

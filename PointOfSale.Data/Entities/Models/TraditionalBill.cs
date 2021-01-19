@@ -7,6 +7,7 @@ namespace PointOfSale.Data.Entities.Models
     public class TraditionalBill
     {
         public int Id { get; set; }
+        public int Quantity { get; set; }
 
         public int OfferId { get; set; }
         public Offer Offer { get; set; }
