@@ -11,38 +11,6 @@ namespace PointOfSale.Data.Seed
     {
         public static void Seed(ModelBuilder builder)
         {
-            builder.Entity<Inventory>()
-                .HasData(new List<Inventory>
-                {
-                    new Inventory
-                    {
-                        Id = 1,
-                        OfferType = OfferType.Item,
-                        Name = "cake",
-                        Quantity = 20
-                    },
-                    new Inventory
-                    {
-                        Id = 2,
-                        OfferType = OfferType.Item,
-                        Name = "TV",
-                        Quantity = 12
-                    },
-                    new Inventory
-                    {
-                        Id = 3,
-                        OfferType = OfferType.Item,
-                        Name = "laptop",
-                        Quantity = 10
-                    },
-                    new Inventory
-                    {
-                        Id = 4,
-                        OfferType = OfferType.Item,
-                        Name = "shampoo",
-                        Quantity = 50
-                    }
-                });
 
             builder.Entity<Employee>()
                 .HasData(new List<Employee>
@@ -53,7 +21,8 @@ namespace PointOfSale.Data.Seed
                         FirstName = "Mate",
                         LastName = "Matić",
                         EmployeeID = "28903610827",
-                        WeeklyWorkingHours = 50
+                        DailyWorkingHours = 8,
+                        StartOfJob = "08:00:00"
                     },
                     new Employee
                     {
@@ -61,7 +30,8 @@ namespace PointOfSale.Data.Seed
                         FirstName = "Ivan",
                         LastName = "Ivanić",
                         EmployeeID = "10927489362",
-                        WeeklyWorkingHours = 25
+                        DailyWorkingHours = 6,
+                        StartOfJob = "14:00:00"
                     },
                     new Employee
                     {
@@ -69,7 +39,8 @@ namespace PointOfSale.Data.Seed
                         FirstName = "Duje",
                         LastName = "Dujić",
                         EmployeeID = "90367890251",
-                        WeeklyWorkingHours = 45
+                        DailyWorkingHours = 10,
+                        StartOfJob = "10:00:00"
                     }
                 });
 
@@ -236,21 +207,24 @@ namespace PointOfSale.Data.Seed
                        Id = 1,
                        OfferId = 1,
                        Name = "cake",
-                       Price = 25m
+                       Price = 25m,
+                       Quantity = 25
                    },
                    new Item
                    {
                        Id = 2,
                        OfferId = 2,
                        Name = "shampoo",
-                       Price = 5m
+                       Price = 5m,
+                       Quantity = 44
                    },
                    new Item
                    {
                        Id = 3,
                        OfferId = 3,
                        Name = "TV",
-                       Price = 1500m
+                       Price = 1500m,
+                       Quantity = 15
                    }
                });
 
@@ -262,21 +236,24 @@ namespace PointOfSale.Data.Seed
                        Id = 1,
                        OfferId = 4,
                        Name = "Dinner by professional chef",
-                       PricePerHour = 500m
+                       PricePerHour = 500m,
+                       AvailabilityStatus = AvailabilityStatus.Available
                    },
                    new Service
                    {
                        Id = 2,
                        OfferId = 5,
                        Name = "Cleaning toilets",
-                       PricePerHour = 120m
+                       PricePerHour = 120m,
+                       AvailabilityStatus = AvailabilityStatus.Available
                    },
                    new Service
                    {
                        Id = 3,
                        OfferId = 6,
                        Name = "Fixing laptop",
-                       PricePerHour = 355m
+                       PricePerHour = 355m,
+                       AvailabilityStatus = AvailabilityStatus.Available
                    }
                });
 
@@ -288,21 +265,24 @@ namespace PointOfSale.Data.Seed
                        Id = 1,
                        OfferId = 7,
                        Name = "Rent professional kitchen",
-                       PricePerHour = 80m
+                       PricePerHour = 80m,
+                       AvailabilityStatus = AvailabilityStatus.Available
                    },
                    new Rent
                    {
                        Id = 2,
                        OfferId = 8,
                        Name = "Rent washing machine",
-                       PricePerHour = 30m
+                       PricePerHour = 30m,
+                       AvailabilityStatus = AvailabilityStatus.Available
                    },
                    new Rent
                    {
                        Id = 3,
                        OfferId = 9,
                        Name = "Rent computer",
-                       PricePerHour = 25m
+                       PricePerHour = 25m,
+                       AvailabilityStatus = AvailabilityStatus.Available
                    }
                });
 

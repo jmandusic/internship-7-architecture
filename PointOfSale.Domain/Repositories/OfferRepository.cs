@@ -1,4 +1,5 @@
-﻿using PointOfSale.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Data.Enums;
 using PointOfSale.Domain.Enums;
@@ -15,6 +16,28 @@ namespace PointOfSale.Domain.Repositories
         {
         }
 
+        public int OfferAdd(int type)
+        {
+            var offer = new Offer();
+            switch (type)
+            {
+                case 0:
+                    offer.OfferType = OfferType.Item;
+                    break;
+                case 1:
+                    offer.OfferType = OfferType.Service;
+                    break;
+                case 2:
+                    offer.OfferType = OfferType.Rent;
+                    break;
+                default:
+                    break;
+            }
+
+            DbContext.Offers.Add(offer);
+            SaveChanges();
+            return offer.Id;
+        }
 
         public ResponseResultType ItemAdd(Item item)
         {
@@ -22,6 +45,9 @@ namespace PointOfSale.Domain.Repositories
             {
                 return ResponseResultType.AlreadyExists;
             }
+
+            item.OfferId = OfferAdd(0);
+
             DbContext.Items.Add(item);
             return SaveChanges();
         }
@@ -32,6 +58,9 @@ namespace PointOfSale.Domain.Repositories
             {
                 return ResponseResultType.AlreadyExists;
             }
+
+            service.OfferId = OfferAdd(1);
+
             DbContext.Services.Add(service);
             return SaveChanges();
         }
@@ -42,6 +71,9 @@ namespace PointOfSale.Domain.Repositories
             {
                 return ResponseResultType.AlreadyExists;
             }
+
+            rent.OfferId = OfferAdd(2);
+
             DbContext.Rents.Add(rent);
             return SaveChanges();
         }
@@ -112,6 +144,12 @@ namespace PointOfSale.Domain.Repositories
 
 
 
+        public ICollection<Offer> AllOffers()
+        {
+            return DbContext.Offers.ToList();
+        }
+
+
         public ICollection<Item> AllItems()
         {
             return DbContext.Items.ToList();
@@ -125,6 +163,113 @@ namespace PointOfSale.Domain.Repositories
         public ICollection<Rent> AllRents()
         {
             return DbContext.Rents.ToList();
+        }
+
+        public ICollection<Item> AllItemsWithCategory(Category category)
+        {
+            var items = new List<Item>();
+            var allItems = AllItems();
+            var offerCategories = AllOfferCategories();
+
+            foreach (var offerCategory in offerCategories)
+            {
+                foreach (var item in allItems)
+                {
+                    if (offerCategory.OfferId == item.OfferId && offerCategory.CategoryId == category.Id)
+                    {
+                        items.Add(item);
+                    }
+                }
+            }
+
+            return items;
+        }
+
+        public ICollection<Service> AllServicesWithCategory(Category category)
+        {
+            var services = new List<Service>();
+            var allServices = AllServices();
+            var offerCategories = AllOfferCategories();
+
+            foreach (var offerCategory in offerCategories)
+            {
+                foreach (var service in allServices)
+                {
+                    if (offerCategory.OfferId == service.OfferId && offerCategory.CategoryId == category.Id)
+                    {
+                        services.Add(service);
+                    }
+                }
+            }
+
+            return services;
+        }
+
+        public ICollection<Rent> AllRentsWithCategory(Category category)
+        {
+            var rents = new List<Rent>();
+            var allRents = AllRents();
+            var offerCategories = AllOfferCategories();
+
+            foreach (var offerCategory in offerCategories)
+            {
+                foreach (var rent in allRents)
+                {
+                    if (offerCategory.OfferId == rent.OfferId && offerCategory.CategoryId == category.Id)
+                    {
+                        rents.Add(rent);
+                    }
+                }
+            }
+
+            return rents;
+        }
+
+        public ICollection<Item> ItemsWithoutCategory(ICollection<Item> all, ICollection<Item> withCategory)
+        {
+            var items = new List<Item>();
+
+            foreach (var item in all)
+            {
+                if (!withCategory.Contains(item))
+                {
+                    items.Add(item);
+                }
+            }
+            return items;
+        }
+
+        public ICollection<Service> ServicessWithoutCategory(ICollection<Service> all, ICollection<Service> withCategory)
+        {
+            var services = new List<Service>();
+
+            foreach (var service in all)
+            {
+                if (!withCategory.Contains(service))
+                {
+                    services.Add(service);
+                }
+            }
+            return services;
+        }
+
+        public ICollection<Rent> RentsWithoutCategory(ICollection<Rent> all, ICollection<Rent> withCategory)
+        {
+            var rents = new List<Rent>();
+
+            foreach (var rent in all)
+            {
+                if (!withCategory.Contains(rent))
+                {
+                    rents.Add(rent);
+                }
+            }
+            return rents;
+        }
+
+        public ICollection<OfferCategory> AllOfferCategories()
+        {
+            return DbContext.OfferCategories.ToList();
         }
     }
 }

@@ -20,7 +20,6 @@ namespace PointOfSale.Data.Entities
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Service> Services { get; set; }

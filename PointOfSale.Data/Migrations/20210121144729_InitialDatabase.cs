@@ -60,26 +60,12 @@ namespace PointOfSale.Data.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmployeeID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WeeklyWorkingHours = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    DailyWorkingHours = table.Column<int>(type: "int", nullable: false),
+                    StartOfJob = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inventories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OfferType = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inventories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,6 +89,7 @@ namespace PointOfSale.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -150,6 +137,7 @@ namespace PointOfSale.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AvailabilityStatus = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -205,6 +193,7 @@ namespace PointOfSale.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AvailabilityStatus = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -285,12 +274,12 @@ namespace PointOfSale.Data.Migrations
                 columns: new[] { "Id", "BillType", "PurchasedOn", "TotalPrice", "isCancelled" },
                 values: new object[,]
                 {
-                    { 1, 0, new DateTime(2021, 1, 18, 20, 16, 59, 357, DateTimeKind.Local).AddTicks(6571), 25m, false },
+                    { 1, 0, new DateTime(2021, 1, 21, 15, 47, 28, 399, DateTimeKind.Local).AddTicks(9449), 25m, false },
                     { 2, 0, new DateTime(2021, 1, 7, 12, 45, 0, 0, DateTimeKind.Unspecified), 5m, false },
                     { 3, 0, new DateTime(2021, 1, 3, 9, 35, 0, 0, DateTimeKind.Unspecified), 1500m, false },
                     { 4, 2, new DateTime(2021, 1, 9, 15, 0, 0, 0, DateTimeKind.Unspecified), 1000m, false },
                     { 5, 2, new DateTime(2020, 12, 28, 17, 30, 0, 0, DateTimeKind.Unspecified), 180m, false },
-                    { 6, 2, new DateTime(2021, 1, 18, 20, 16, 59, 360, DateTimeKind.Local).AddTicks(6065), 710m, false },
+                    { 6, 2, new DateTime(2021, 1, 21, 15, 47, 28, 402, DateTimeKind.Local).AddTicks(9011), 710m, false },
                     { 7, 1, new DateTime(2021, 1, 2, 17, 45, 0, 0, DateTimeKind.Unspecified), 200m, false },
                     { 8, 1, new DateTime(2021, 1, 5, 13, 25, 0, 0, DateTimeKind.Unspecified), 67.5m, false },
                     { 9, 1, new DateTime(2021, 1, 18, 12, 45, 0, 0, DateTimeKind.Unspecified), 62.5m, false }
@@ -311,30 +300,19 @@ namespace PointOfSale.Data.Migrations
                 columns: new[] { "Id", "CustomerID", "FirstName", "LastName" },
                 values: new object[,]
                 {
-                    { 1, "62783190283", "Ante", "Antić" },
+                    { 3, "98368109372", "Marko", "Markić" },
                     { 2, "092836784921", "Josip", "Josipić" },
-                    { 3, "98368109372", "Marko", "Markić" }
+                    { 1, "62783190283", "Ante", "Antić" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Employees",
-                columns: new[] { "Id", "EmployeeID", "FirstName", "LastName", "WeeklyWorkingHours" },
+                columns: new[] { "Id", "DailyWorkingHours", "EmployeeID", "FirstName", "LastName", "StartOfJob" },
                 values: new object[,]
                 {
-                    { 3, "90367890251", "Duje", "Dujić", 45m },
-                    { 1, "28903610827", "Mate", "Matić", 50m },
-                    { 2, "10927489362", "Ivan", "Ivanić", 25m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Inventories",
-                columns: new[] { "Id", "Name", "OfferType", "Quantity" },
-                values: new object[,]
-                {
-                    { 1, "cake", 0, 20 },
-                    { 2, "TV", 0, 12 },
-                    { 3, "laptop", 0, 10 },
-                    { 4, "shampoo", 0, 50 }
+                    { 1, 8, "28903610827", "Mate", "Matić", "08:00:00" },
+                    { 2, 6, "10927489362", "Ivan", "Ivanić", "14:00:00" },
+                    { 3, 10, "90367890251", "Duje", "Dujić", "10:00:00" }
                 });
 
             migrationBuilder.InsertData(
@@ -342,7 +320,6 @@ namespace PointOfSale.Data.Migrations
                 columns: new[] { "Id", "OfferType" },
                 values: new object[,]
                 {
-                    { 8, 2 },
                     { 1, 0 },
                     { 2, 0 },
                     { 3, 0 },
@@ -350,17 +327,18 @@ namespace PointOfSale.Data.Migrations
                     { 5, 1 },
                     { 6, 1 },
                     { 7, 2 },
+                    { 8, 2 },
                     { 9, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Items",
-                columns: new[] { "Id", "Name", "OfferId", "Price" },
+                columns: new[] { "Id", "Name", "OfferId", "Price", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, "cake", 1, 25m },
-                    { 2, "shampoo", 2, 5m },
-                    { 3, "TV", 3, 1500m }
+                    { 1, "cake", 1, 25m, 25 },
+                    { 2, "shampoo", 2, 5m, 44 },
+                    { 3, "TV", 3, 1500m, 15 }
                 });
 
             migrationBuilder.InsertData(
@@ -381,12 +359,12 @@ namespace PointOfSale.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Rents",
-                columns: new[] { "Id", "Name", "OfferId", "PricePerHour" },
+                columns: new[] { "Id", "AvailabilityStatus", "Name", "OfferId", "PricePerHour" },
                 values: new object[,]
                 {
-                    { 2, "Rent washing machine", 8, 30m },
-                    { 1, "Rent professional kitchen", 7, 80m },
-                    { 3, "Rent computer", 9, 25m }
+                    { 2, 0, "Rent washing machine", 8, 30m },
+                    { 1, 0, "Rent professional kitchen", 7, 80m },
+                    { 3, 0, "Rent computer", 9, 25m }
                 });
 
             migrationBuilder.InsertData(
@@ -401,12 +379,12 @@ namespace PointOfSale.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Services",
-                columns: new[] { "Id", "Name", "OfferId", "PricePerHour" },
+                columns: new[] { "Id", "AvailabilityStatus", "Name", "OfferId", "PricePerHour" },
                 values: new object[,]
                 {
-                    { 2, "Cleaning toilets", 5, 120m },
-                    { 1, "Dinner by professional chef", 4, 500m },
-                    { 3, "Fixing laptop", 6, 355m }
+                    { 2, 0, "Cleaning toilets", 5, 120m },
+                    { 1, 0, "Dinner by professional chef", 4, 500m },
+                    { 3, 0, "Fixing laptop", 6, 355m }
                 });
 
             migrationBuilder.InsertData(
@@ -497,9 +475,6 @@ namespace PointOfSale.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Inventories");
-
             migrationBuilder.DropTable(
                 name: "Items");
 

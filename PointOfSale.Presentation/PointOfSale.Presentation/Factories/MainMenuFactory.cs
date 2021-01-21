@@ -15,6 +15,7 @@ namespace PointOfSale.Presentation.Factories
             var actions = new List<IAction>
             {
                 OfferActionsFactory.GetOfferParentAction(),
+                CategoryActionsFactory.GetOfferParentAction(),
                 new ExitMenuAction()
             };
 

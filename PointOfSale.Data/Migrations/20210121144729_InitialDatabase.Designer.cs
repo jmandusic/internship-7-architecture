@@ -10,7 +10,7 @@ using PointOfSale.Data.Entities;
 namespace PointOfSale.Data.Migrations
 {
     [DbContext(typeof(PointOfSaleDbContext))]
-    [Migration("20210118191700_InitialDatabase")]
+    [Migration("20210121144729_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 1,
                             BillType = 0,
-                            PurchasedOn = new DateTime(2021, 1, 18, 20, 16, 59, 357, DateTimeKind.Local).AddTicks(6571),
+                            PurchasedOn = new DateTime(2021, 1, 21, 15, 47, 28, 399, DateTimeKind.Local).AddTicks(9449),
                             TotalPrice = 25m,
                             isCancelled = false
                         },
@@ -89,7 +89,7 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 6,
                             BillType = 2,
-                            PurchasedOn = new DateTime(2021, 1, 18, 20, 16, 59, 360, DateTimeKind.Local).AddTicks(6065),
+                            PurchasedOn = new DateTime(2021, 1, 21, 15, 47, 28, 402, DateTimeKind.Local).AddTicks(9011),
                             TotalPrice = 710m,
                             isCancelled = false
                         },
@@ -202,6 +202,9 @@ namespace PointOfSale.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("DailyWorkingHours")
+                        .HasColumnType("int");
+
                     b.Property<string>("EmployeeID")
                         .HasColumnType("nvarchar(max)");
 
@@ -211,8 +214,8 @@ namespace PointOfSale.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("WeeklyWorkingHours")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("StartOfJob")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -222,77 +225,29 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 1,
+                            DailyWorkingHours = 8,
                             EmployeeID = "28903610827",
                             FirstName = "Mate",
                             LastName = "Matić",
-                            WeeklyWorkingHours = 50m
+                            StartOfJob = "08:00:00"
                         },
                         new
                         {
                             Id = 2,
+                            DailyWorkingHours = 6,
                             EmployeeID = "10927489362",
                             FirstName = "Ivan",
                             LastName = "Ivanić",
-                            WeeklyWorkingHours = 25m
+                            StartOfJob = "14:00:00"
                         },
                         new
                         {
                             Id = 3,
+                            DailyWorkingHours = 10,
                             EmployeeID = "90367890251",
                             FirstName = "Duje",
                             LastName = "Dujić",
-                            WeeklyWorkingHours = 45m
-                        });
-                });
-
-            modelBuilder.Entity("PointOfSale.Data.Entities.Models.Inventory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OfferType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Inventories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "cake",
-                            OfferType = 0,
-                            Quantity = 20
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "TV",
-                            OfferType = 0,
-                            Quantity = 12
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "laptop",
-                            OfferType = 0,
-                            Quantity = 10
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "shampoo",
-                            OfferType = 0,
-                            Quantity = 50
+                            StartOfJob = "10:00:00"
                         });
                 });
 
@@ -312,6 +267,9 @@ namespace PointOfSale.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OfferId");
@@ -324,21 +282,24 @@ namespace PointOfSale.Data.Migrations
                             Id = 1,
                             Name = "cake",
                             OfferId = 1,
-                            Price = 25m
+                            Price = 25m,
+                            Quantity = 25
                         },
                         new
                         {
                             Id = 2,
                             Name = "shampoo",
                             OfferId = 2,
-                            Price = 5m
+                            Price = 5m,
+                            Quantity = 44
                         },
                         new
                         {
                             Id = 3,
                             Name = "TV",
                             OfferId = 3,
-                            Price = 1500m
+                            Price = 1500m,
+                            Quantity = 15
                         });
                 });
 
@@ -489,6 +450,9 @@ namespace PointOfSale.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("AvailabilityStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -508,6 +472,7 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 1,
+                            AvailabilityStatus = 0,
                             Name = "Rent professional kitchen",
                             OfferId = 7,
                             PricePerHour = 80m
@@ -515,6 +480,7 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 2,
+                            AvailabilityStatus = 0,
                             Name = "Rent washing machine",
                             OfferId = 8,
                             PricePerHour = 30m
@@ -522,6 +488,7 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 3,
+                            AvailabilityStatus = 0,
                             Name = "Rent computer",
                             OfferId = 9,
                             PricePerHour = 25m
@@ -534,6 +501,9 @@ namespace PointOfSale.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("AvailabilityStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -554,6 +524,7 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 1,
+                            AvailabilityStatus = 0,
                             Name = "Dinner by professional chef",
                             OfferId = 4,
                             PricePerHour = 500m
@@ -561,6 +532,7 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 2,
+                            AvailabilityStatus = 0,
                             Name = "Cleaning toilets",
                             OfferId = 5,
                             PricePerHour = 120m
@@ -568,6 +540,7 @@ namespace PointOfSale.Data.Migrations
                         new
                         {
                             Id = 3,
+                            AvailabilityStatus = 0,
                             Name = "Fixing laptop",
                             OfferId = 6,
                             PricePerHour = 355m

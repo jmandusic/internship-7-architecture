@@ -1,4 +1,5 @@
 ﻿using PointOfSale.Data.Entities.Models;
+using PointOfSale.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,47 @@ namespace PointOfSale.Presentation.Helpers
             {
                 RentPrint(rent);
                 Console.WriteLine();
+            }
+        }
+
+        public static void CategoryPrint(Category category)
+        {
+            Console.WriteLine($"Id: {category.Id} \n" +
+                              $"Category name: {category.NameOfCategory}");
+        }
+
+        public static void CategoriesPrint(ICollection<Category> categories)
+        {
+            foreach (var category in categories)
+            {
+                CategoryPrint(category);
+                Console.WriteLine();
+            }
+        }
+
+        public static void OffersPrint(ICollection<Item> items, ICollection<Service> services, ICollection<Rent> rents)
+        {
+            foreach (var item in items)
+            {
+                Console.WriteLine($"Id: {item.OfferId} \n" +
+                          $"Name: {item.Name} \n");
+            }
+
+            foreach (var service in services)
+            {
+                Console.WriteLine($"Id: {service.OfferId} \n" +
+                          $"Name: {service.Name} \n");
+            }
+
+            foreach (var rent in rents)
+            {
+                Console.WriteLine($"Id: {rent.OfferId} \n" +
+                          $"Name: {rent.Name} \n");
+            }
+
+            if (items.Count == 0 && services.Count == 0 && rents.Count == 0)
+            {
+                Console.WriteLine("No offers at the moment");
             }
         }
     }

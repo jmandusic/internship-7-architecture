@@ -58,6 +58,9 @@ namespace PointOfSale.Presentation.Actions.OfferActions
             Console.WriteLine("Item price:");
             item.Price = ReadHelper.InputNumberCheck();
 
+            Console.WriteLine("Item quantity:");
+            item.Quantity = ReadHelper.InputNumberCheck();
+
             Console.WriteLine(_offerRepository.ItemAdd(item));
 
             return;
@@ -73,6 +76,8 @@ namespace PointOfSale.Presentation.Actions.OfferActions
             Console.WriteLine("Service price per hour:");
             service.PricePerHour = ReadHelper.InputNumberCheck();
 
+            service.AvailabilityStatus = HelpFunctions.ChooseAvailabilityStatus();
+
             Console.WriteLine(_offerRepository.ServiceAdd(service));
 
             return;
@@ -86,6 +91,8 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 
             Console.WriteLine("Rent price per hour:");
             rent.PricePerHour = ReadHelper.InputNumberCheck();
+
+            rent.AvailabilityStatus = HelpFunctions.ChooseAvailabilityStatus();
 
             Console.WriteLine(_offerRepository.RentAdd(rent));
 

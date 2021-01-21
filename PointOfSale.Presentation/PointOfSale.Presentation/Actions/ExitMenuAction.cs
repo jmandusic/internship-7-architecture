@@ -18,6 +18,7 @@ namespace PointOfSale.Presentation.Actions
 
         public void Call()
         {
+            Console.Clear();
         }
     }
 }

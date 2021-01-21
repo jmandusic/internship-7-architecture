@@ -10,7 +10,9 @@ namespace PointOfSale.Data.Entities.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmployeeID { get; set; }
-        public decimal WeeklyWorkingHours { get; set; }
+        public int DailyWorkingHours { get; set; }
+        public string StartOfJob { get; set; }
+
 
         public ICollection<ServiceBill> ServiceBills { get; set; }
 
