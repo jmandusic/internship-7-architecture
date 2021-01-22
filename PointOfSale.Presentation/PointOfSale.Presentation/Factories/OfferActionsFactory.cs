@@ -17,9 +17,24 @@ namespace PointOfSale.Presentation.Factories
         {
             var offerActions = new List<IAction>
             {
-                new OfferAddAction(RepositoryFactory.GetRepository<OfferRepository>()),
-                new OfferDeleteAction(RepositoryFactory.GetRepository<OfferRepository>()),
-                new OfferEditAction(RepositoryFactory.GetRepository<OfferRepository>()),
+                new OfferAddAction
+                (
+                    RepositoryFactory.GetRepository<ItemRepository>(),
+                    RepositoryFactory.GetRepository<ServiceRepository>(),
+                    RepositoryFactory.GetRepository<RentRepository>()
+                ),
+                new OfferDeleteAction
+                (
+                    RepositoryFactory.GetRepository<ItemRepository>(),
+                    RepositoryFactory.GetRepository<ServiceRepository>(),
+                    RepositoryFactory.GetRepository<RentRepository>()
+                ),
+                new OfferEditAction
+                (
+                    RepositoryFactory.GetRepository<ItemRepository>(),
+                    RepositoryFactory.GetRepository<ServiceRepository>(),
+                    RepositoryFactory.GetRepository<RentRepository>()
+                ),
                 new ExitMenuAction()
             };
 

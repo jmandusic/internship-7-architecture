@@ -10,7 +10,7 @@ using PointOfSale.Data.Entities;
 namespace PointOfSale.Data.Migrations
 {
     [DbContext(typeof(PointOfSaleDbContext))]
-    [Migration("20210121144729_InitialDatabase")]
+    [Migration("20210122154106_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 1,
                             BillType = 0,
-                            PurchasedOn = new DateTime(2021, 1, 21, 15, 47, 28, 399, DateTimeKind.Local).AddTicks(9449),
+                            PurchasedOn = new DateTime(2021, 1, 22, 16, 41, 5, 701, DateTimeKind.Local).AddTicks(1507),
                             TotalPrice = 25m,
                             isCancelled = false
                         },
@@ -89,7 +89,7 @@ namespace PointOfSale.Data.Migrations
                         {
                             Id = 6,
                             BillType = 2,
-                            PurchasedOn = new DateTime(2021, 1, 21, 15, 47, 28, 402, DateTimeKind.Local).AddTicks(9011),
+                            PurchasedOn = new DateTime(2021, 1, 22, 16, 41, 5, 738, DateTimeKind.Local).AddTicks(1201),
                             TotalPrice = 710m,
                             isCancelled = false
                         },

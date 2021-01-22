@@ -16,14 +16,18 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 {
     public class OfferEditAction : IAction
     {
-        private readonly OfferRepository _offerRepository;
+        private readonly ItemRepository _itemRepository;
+        private readonly ServiceRepository _serviceRepository;
+        private readonly RentRepository _rentRepository;
 
         public int MenuIndex { get; set; }
         public string Label { get; set; } = "Edit offer";
 
-        public OfferEditAction(OfferRepository offerRepository)
+        public OfferEditAction(ItemRepository itemRepository, ServiceRepository serviceRepository, RentRepository rentRepository)
         {
-            _offerRepository = offerRepository;
+            _itemRepository = itemRepository;
+            _serviceRepository = serviceRepository;
+            _rentRepository = rentRepository;
         }
 
 
@@ -51,7 +55,7 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 
         public void EditItem()
         {
-            var items = _offerRepository.AllItems();
+            var items = _itemRepository.AllItems();
             PrintHelper.ItemsPrint(items);
 
             Console.WriteLine("Enter item Id you want to edit:");
@@ -79,14 +83,14 @@ namespace PointOfSale.Presentation.Actions.OfferActions
                 ? price
                 : item.Price;
 
-            Console.WriteLine(_offerRepository.ItemEdit(item, index));
+            Console.WriteLine(_itemRepository.ItemEdit(item, index));
 
             return;
         }
 
         public void EditService()
         {
-            var services = _offerRepository.AllServices();
+            var services = _serviceRepository.AllServices();
             PrintHelper.ServicesPrint(services);
 
             Console.WriteLine("Enter service Id you want to edit:");
@@ -114,14 +118,14 @@ namespace PointOfSale.Presentation.Actions.OfferActions
                 ? price
                 : service.PricePerHour;
 
-            Console.WriteLine(_offerRepository.ServiceEdit(service, index));
+            Console.WriteLine(_serviceRepository.ServiceEdit(service, index));
 
             return;
         }
 
         public void EditRent()
         {
-            var rents = _offerRepository.AllRents();
+            var rents = _rentRepository.AllRents();
             PrintHelper.RentsPrint(rents);
 
             Console.WriteLine("Enter rent Id you want to edit:");
@@ -149,7 +153,7 @@ namespace PointOfSale.Presentation.Actions.OfferActions
                 ? price
                 : rent.PricePerHour;
 
-            Console.WriteLine(_offerRepository.RentEdit(rent, index));
+            Console.WriteLine(_rentRepository.RentEdit(rent, index));
 
             return;
         }

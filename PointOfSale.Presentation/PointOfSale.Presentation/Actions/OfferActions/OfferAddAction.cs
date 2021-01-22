@@ -15,14 +15,18 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 {
     public class OfferAddAction : IAction
     {
-        private readonly OfferRepository _offerRepository;
+        private readonly ItemRepository _itemRepository;
+        private readonly ServiceRepository _serviceRepository;
+        private readonly RentRepository _rentRepository;
 
         public int MenuIndex { get; set; }
         public string Label { get; set; } = "Add offer";
 
-        public OfferAddAction(OfferRepository offerRepository)
+        public OfferAddAction(ItemRepository itemRepository, ServiceRepository serviceRepository, RentRepository rentRepository)
         {
-            _offerRepository = offerRepository;
+            _itemRepository = itemRepository;
+            _serviceRepository = serviceRepository;
+            _rentRepository = rentRepository;
         }
 
 
@@ -61,7 +65,7 @@ namespace PointOfSale.Presentation.Actions.OfferActions
             Console.WriteLine("Item quantity:");
             item.Quantity = ReadHelper.InputNumberCheck();
 
-            Console.WriteLine(_offerRepository.ItemAdd(item));
+            Console.WriteLine(_itemRepository.ItemAdd(item));
 
             return;
         }
@@ -78,7 +82,7 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 
             service.AvailabilityStatus = HelpFunctions.ChooseAvailabilityStatus();
 
-            Console.WriteLine(_offerRepository.ServiceAdd(service));
+            Console.WriteLine(_serviceRepository.ServiceAdd(service));
 
             return;
         }
@@ -94,7 +98,7 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 
             rent.AvailabilityStatus = HelpFunctions.ChooseAvailabilityStatus();
 
-            Console.WriteLine(_offerRepository.RentAdd(rent));
+            Console.WriteLine(_rentRepository.RentAdd(rent));
 
             return;
         }

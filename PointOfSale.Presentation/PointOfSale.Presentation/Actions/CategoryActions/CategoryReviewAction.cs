@@ -14,15 +14,20 @@ namespace PointOfSale.Presentation.Actions.CategoryActions
     public class CategoryReviewAction : IAction
     {
         private readonly CategoryRepository _categoryRepository;
-        private readonly OfferRepository _offerRepository;
+        private readonly ItemRepository _itemRepository;
+        private readonly ServiceRepository _serviceRepository;
+        private readonly RentRepository _rentRepository;
 
         public int MenuIndex { get; set; }
         public string Label { get; set; } = "Overview of offers in categories";
 
-        public CategoryReviewAction(CategoryRepository categoryRepository, OfferRepository offerRepository)
+        public CategoryReviewAction(CategoryRepository categoryRepository, ItemRepository itemRepository,
+            ServiceRepository serviceRepository, RentRepository rentRepository)
         {
             _categoryRepository = categoryRepository;
-            _offerRepository = offerRepository;
+            _itemRepository = itemRepository;
+            _serviceRepository = serviceRepository;
+            _rentRepository = rentRepository;
         }
 
 
@@ -34,9 +39,9 @@ namespace PointOfSale.Presentation.Actions.CategoryActions
             {
                 Console.WriteLine("\t \t " + category.NameOfCategory.ToUpper());
 
-                var items = _offerRepository.AllItemsWithCategory(category);
-                var services = _offerRepository.AllServicesWithCategory(category);
-                var rents = _offerRepository.AllRentsWithCategory(category);
+                var items = _itemRepository.AllItemsWithCategory(category);
+                var services = _serviceRepository.AllServicesWithCategory(category);
+                var rents = _rentRepository.AllRentsWithCategory(category);
 
                 PrintHelper.OffersPrint(items, services, rents);
                 Console.WriteLine();

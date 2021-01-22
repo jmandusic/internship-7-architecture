@@ -16,15 +16,20 @@ namespace PointOfSale.Presentation.Actions.CategoryActions
     public class CategoryEditAction : IAction
     {
         private readonly CategoryRepository _categoryRepository;
-        private readonly OfferRepository _offerRepository;
+        private readonly ItemRepository _itemRepository;
+        private readonly ServiceRepository _serviceRepository;
+        private readonly RentRepository _rentRepository;
 
         public int MenuIndex { get; set; }
         public string Label { get; set; } = "Edit category";
 
-        public CategoryEditAction(CategoryRepository categoryRepository, OfferRepository offerRepository)
+        public CategoryEditAction(CategoryRepository categoryRepository, ItemRepository itemRepository,
+            ServiceRepository serviceRepository, RentRepository rentRepository)
         {
             _categoryRepository = categoryRepository;
-            _offerRepository = offerRepository;
+            _itemRepository = itemRepository;
+            _serviceRepository = serviceRepository;
+            _rentRepository = rentRepository;
         }
 
 
@@ -92,14 +97,14 @@ namespace PointOfSale.Presentation.Actions.CategoryActions
         {
             var offerCategories = _categoryRepository.GetOffersFromCategory(category);
 
-            var itemsWithoutCategory = _offerRepository.ItemsWithoutCategory(_offerRepository.AllItems(),
-                _offerRepository.AllItemsWithCategory(category));
+            var itemsWithoutCategory = _itemRepository.ItemsWithoutCategory(_itemRepository.AllItems(),
+                _itemRepository.AllItemsWithCategory(category));
 
-            var servicesWithoutCategory = _offerRepository.ServicessWithoutCategory(_offerRepository.AllServices(),
-                _offerRepository.AllServicesWithCategory(category));
+            var servicesWithoutCategory = _serviceRepository.ServicessWithoutCategory(_serviceRepository.AllServices(),
+                _serviceRepository.AllServicesWithCategory(category));
 
-            var rentsWithoutCategory = _offerRepository.RentsWithoutCategory(_offerRepository.AllRents(),
-                _offerRepository.AllRentsWithCategory(category));
+            var rentsWithoutCategory = _rentRepository.RentsWithoutCategory(_rentRepository.AllRents(),
+                _rentRepository.AllRentsWithCategory(category));
 
             PrintHelper.OffersPrint(itemsWithoutCategory, servicesWithoutCategory, rentsWithoutCategory);
             Console.WriteLine("These are all offers that are not in " + category.NameOfCategory);
@@ -107,8 +112,8 @@ namespace PointOfSale.Presentation.Actions.CategoryActions
             Console.WriteLine("To see all offers in the store enter 1 or press enter to continue");
             if (ReadHelper.TryReadLineIfNotEmpty(out var option) && option == "1")
             {
-                PrintHelper.OffersPrint(_offerRepository.AllItems(),
-                    _offerRepository.AllServices(), _offerRepository.AllRents());
+                PrintHelper.OffersPrint(_itemRepository.AllItems(),
+                    _serviceRepository.AllServices(), _rentRepository.AllRents());
                 Console.WriteLine();
             }
 
@@ -130,9 +135,9 @@ namespace PointOfSale.Presentation.Actions.CategoryActions
                 return;
             }
 
-            var items = _offerRepository.AllItemsWithCategory(category);
-            var services = _offerRepository.AllServicesWithCategory(category);
-            var rents = _offerRepository.AllRentsWithCategory(category);
+            var items = _itemRepository.AllItemsWithCategory(category);
+            var services = _serviceRepository.AllServicesWithCategory(category);
+            var rents = _rentRepository.AllRentsWithCategory(category);
 
             PrintHelper.OffersPrint(items, services, rents);
 

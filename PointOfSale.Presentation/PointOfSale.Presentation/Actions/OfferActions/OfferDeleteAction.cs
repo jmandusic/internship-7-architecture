@@ -13,16 +13,19 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 {
     public class OfferDeleteAction : IAction
     {
-        private readonly OfferRepository _offerRepository;
+        private readonly ItemRepository _itemRepository;
+        private readonly ServiceRepository _serviceRepository;
+        private readonly RentRepository _rentRepository;
 
         public int MenuIndex { get; set; }
         public string Label { get; set; } = "Delete offer";
 
-        public OfferDeleteAction(OfferRepository offerRepository)
+        public OfferDeleteAction(ItemRepository itemRepository, ServiceRepository serviceRepository, RentRepository rentRepository)
         {
-            _offerRepository = offerRepository;
+            _itemRepository = itemRepository;
+            _serviceRepository = serviceRepository;
+            _rentRepository = rentRepository;
         }
-
 
         public void Call()
         {
@@ -48,27 +51,27 @@ namespace PointOfSale.Presentation.Actions.OfferActions
 
         public void DeleteItem()
         {
-            PrintHelper.ItemsPrint(_offerRepository.AllItems());
+            PrintHelper.ItemsPrint(_itemRepository.AllItems());
             Console.WriteLine("Enter item Id you want to delete:");
-            Console.WriteLine(_offerRepository.ItemDelete(ReadHelper.InputNumberCheck()));
+            Console.WriteLine(_itemRepository.ItemDelete(ReadHelper.InputNumberCheck()));
 
             return;
         }
 
         public void DeleteService()
         {
-            PrintHelper.ServicesPrint(_offerRepository.AllServices());
+            PrintHelper.ServicesPrint(_serviceRepository.AllServices());
             Console.WriteLine("Enter service Id you want to delete:");
-            Console.WriteLine(_offerRepository.ServiceDelete(ReadHelper.InputNumberCheck()));
+            Console.WriteLine(_serviceRepository.ServiceDelete(ReadHelper.InputNumberCheck()));
 
             return;
         }
 
         public void DeleteRent()
         {
-            PrintHelper.RentsPrint(_offerRepository.AllRents());
+            PrintHelper.RentsPrint(_rentRepository.AllRents());
             Console.WriteLine("Enter item Id you want to delete:");
-            Console.WriteLine(_offerRepository.RentDelete(ReadHelper.InputNumberCheck()));
+            Console.WriteLine(_rentRepository.RentDelete(ReadHelper.InputNumberCheck()));
 
             return;
         }

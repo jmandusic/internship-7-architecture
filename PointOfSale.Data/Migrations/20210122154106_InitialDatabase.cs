@@ -274,12 +274,12 @@ namespace PointOfSale.Data.Migrations
                 columns: new[] { "Id", "BillType", "PurchasedOn", "TotalPrice", "isCancelled" },
                 values: new object[,]
                 {
-                    { 1, 0, new DateTime(2021, 1, 21, 15, 47, 28, 399, DateTimeKind.Local).AddTicks(9449), 25m, false },
+                    { 1, 0, new DateTime(2021, 1, 22, 16, 41, 5, 701, DateTimeKind.Local).AddTicks(1507), 25m, false },
                     { 2, 0, new DateTime(2021, 1, 7, 12, 45, 0, 0, DateTimeKind.Unspecified), 5m, false },
                     { 3, 0, new DateTime(2021, 1, 3, 9, 35, 0, 0, DateTimeKind.Unspecified), 1500m, false },
                     { 4, 2, new DateTime(2021, 1, 9, 15, 0, 0, 0, DateTimeKind.Unspecified), 1000m, false },
                     { 5, 2, new DateTime(2020, 12, 28, 17, 30, 0, 0, DateTimeKind.Unspecified), 180m, false },
-                    { 6, 2, new DateTime(2021, 1, 21, 15, 47, 28, 402, DateTimeKind.Local).AddTicks(9011), 710m, false },
+                    { 6, 2, new DateTime(2021, 1, 22, 16, 41, 5, 738, DateTimeKind.Local).AddTicks(1201), 710m, false },
                     { 7, 1, new DateTime(2021, 1, 2, 17, 45, 0, 0, DateTimeKind.Unspecified), 200m, false },
                     { 8, 1, new DateTime(2021, 1, 5, 13, 25, 0, 0, DateTimeKind.Unspecified), 67.5m, false },
                     { 9, 1, new DateTime(2021, 1, 18, 12, 45, 0, 0, DateTimeKind.Unspecified), 62.5m, false }
