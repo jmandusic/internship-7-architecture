@@ -17,25 +17,33 @@ namespace PointOfSale.Domain.Repositories
 
         public ResponseResultType AddQuantity(Item item, int quantity)
         {
-            item.Quantity += quantity;
+            var edited = DbContext.Items.Find(item.Id);
+            edited.Quantity += quantity;
             return SaveChanges();
         }
 
         public ResponseResultType ReduceQuantity(Item item, int quantity)
         {
-            item.Quantity -= quantity;
+            var edited = DbContext.Items.Find(item.Id);
+            edited.Quantity -= quantity;
+            if (edited.Quantity < 0)
+            {
+                edited.Quantity = 0;
+            }
             return SaveChanges();
         }
 
         public ResponseResultType ChangeServiceStatus(Service service)
         {
-            if (service.AvailabilityStatus == AvailabilityStatus.Available)
+            var edited = DbContext.Services.Find(service.Id);
+
+            if (edited.AvailabilityStatus == AvailabilityStatus.Available)
             {
-                service.AvailabilityStatus = AvailabilityStatus.NotAvailableDueTechnicalDifficulties;
+                edited.AvailabilityStatus = AvailabilityStatus.NotAvailableDueTechnicalDifficulties;
             }
             else
             {
-                service.AvailabilityStatus = AvailabilityStatus.Available;
+                edited.AvailabilityStatus = AvailabilityStatus.Available;
             }
 
             return SaveChanges();
@@ -43,16 +51,27 @@ namespace PointOfSale.Domain.Repositories
 
         public ResponseResultType ChangeRentStatus(Rent rent)
         {
-            if (rent.AvailabilityStatus == AvailabilityStatus.Available)
+            var edited = DbContext.Rents.Find(rent.Id);
+
+            if (edited.AvailabilityStatus == AvailabilityStatus.Available)
             {
-                rent.AvailabilityStatus = AvailabilityStatus.NotAvailableDueTechnicalDifficulties;
+                edited.AvailabilityStatus = AvailabilityStatus.NotAvailableDueTechnicalDifficulties;
             }
             else
             {
-                rent.AvailabilityStatus = AvailabilityStatus.Available;
+                edited.AvailabilityStatus = AvailabilityStatus.Available;
             }
 
             return SaveChanges();
+        }
+
+
+        public ICollection<Item> AvailableItems()
+        {
+            var items = DbContext.Items
+                .Where(i => i.Quantity > 0)
+                .ToList();
+            return items;
         }
 
         public ICollection<Service> AvailableServices()

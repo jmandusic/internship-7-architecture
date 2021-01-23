@@ -17,6 +17,7 @@ namespace PointOfSale.Presentation.Factories
                 OfferActionsFactory.GetOfferParentAction(),
                 CategoryActionsFactory.GetOfferParentAction(),
                 InventoryActionsFactory.GetInventoryParentAction(),
+                BillActionsFactory.GetBillParentAction(),
                 new ExitMenuAction()
             };
 

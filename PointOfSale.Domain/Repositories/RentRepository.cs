@@ -16,15 +16,7 @@ namespace PointOfSale.Domain.Repositories
 
         public Rent FindRent(Offer offer)
         {
-            var rents = AllRents();
-            foreach (var rent in rents)
-            {
-                if (rent.OfferId == offer.Id)
-                {
-                    return rent;
-                }
-            }
-            return new Rent();
+            return DbContext.Rents.Where(r => r.OfferId == offer.Id).FirstOrDefault();
         }
 
         public ResponseResultType RentAdd(Rent rent)

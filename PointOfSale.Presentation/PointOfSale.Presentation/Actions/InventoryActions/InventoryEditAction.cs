@@ -75,8 +75,7 @@ namespace PointOfSale.Presentation.Actions.InventoryActions
         {
             var item = _itemRepository.FindItem(offer);
 
-            PrintHelper.ItemPrint(item);
-            Console.WriteLine("Quantity: " + item.Quantity);
+            PrintHelper.ItemLongPrint(item);
 
             while (true)
             {
@@ -103,8 +102,7 @@ namespace PointOfSale.Presentation.Actions.InventoryActions
         {
             var service = _serviceRepository.FindService(offer);
 
-            PrintHelper.ServicePrint(service);
-            Console.WriteLine("Availability status: " + service.AvailabilityStatus);
+            PrintHelper.ServiceLongPrint(service);
 
             while (true)
             {
@@ -128,8 +126,7 @@ namespace PointOfSale.Presentation.Actions.InventoryActions
         {
             var rent = _rentRepository.FindRent(offer);
 
-            PrintHelper.RentPrint(rent);
-            Console.WriteLine("Availability status: " + rent.AvailabilityStatus);
+            PrintHelper.RentLongPrint(rent);
 
             while (true)
             {
@@ -150,4 +147,3 @@ namespace PointOfSale.Presentation.Actions.InventoryActions
         }
     }
 }
-

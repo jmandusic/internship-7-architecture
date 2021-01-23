@@ -16,15 +16,7 @@ namespace PointOfSale.Domain.Repositories
 
         public Item FindItem(Offer offer)
         {
-            var items = AllItems();
-            foreach (var item in items)
-            {
-                if (item.OfferId == offer.Id)
-                {
-                    return item;
-                }
-            }
-            return new Item();
+            return DbContext.Items.Where(i => i.OfferId == offer.Id).FirstOrDefault();
         }
 
         public ResponseResultType ItemAdd(Item item)
