@@ -1,4 +1,5 @@
-﻿using PointOfSale.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Domain.Enums;
 using System;
@@ -25,6 +26,15 @@ namespace PointOfSale.Domain.Repositories
             DbContext.SubscriptionBills.Add(subscriptionBill);
 
             return SaveChanges();
+        }
+
+        public ICollection<SubscriptionBill> ActiveRents()
+        {
+            return DbContext.SubscriptionBills
+                 .Include(b => b.Bill)
+                 .Include(o => o.Offer)
+                 .Where(sb => sb.StartOfRent < DateTime.Now && sb.EndOfRent > DateTime.Now && !sb.Bill.isCancelled)
+                 .ToList();
         }
     }
 }

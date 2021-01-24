@@ -2,6 +2,7 @@
 using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Data.Enums;
+using PointOfSale.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,15 @@ namespace PointOfSale.Presentation.Helpers
             foreach (var item in items)
             {
                 ItemPrint(item);
+                Console.WriteLine();
+            }
+        }
+
+        public static void ItemsLongPrint(ICollection<Item> items)
+        {
+            foreach (var item in items)
+            {
+                ItemLongPrint(item);
                 Console.WriteLine();
             }
         }
@@ -199,6 +209,15 @@ namespace PointOfSale.Presentation.Helpers
             }
         }
 
+        public static void PrintAllBills(ICollection<Bill> bills)
+        {
+            foreach (var bill in bills)
+            {
+                Console.WriteLine($"Bill type: {bill.BillType} \n" + 
+                                  $"Transaction: {bill.PurchasedOn} \n" + 
+                                  $"Total price: {bill.TotalPrice} \n");
+            }
+        }
         public static void EmployeePrint(Employee employee)
         {
             Console.WriteLine($"Id: {employee.Id} \n" +
@@ -228,6 +247,28 @@ namespace PointOfSale.Presentation.Helpers
             {
                 CustomerPrint(customer);
                 Console.WriteLine();
+            }
+        }
+
+        public static void PrintOffer(Offer offer, ItemRepository itemRepository,
+            ServiceRepository serviceRepository, RentRepository rentRepository)
+        {
+            switch (offer.OfferType)
+            {
+                case OfferType.Item:
+                    var item = itemRepository.FindItem(offer);
+                    ItemPrint(item);
+                    break;
+                case OfferType.Service:
+                    var service = serviceRepository.FindService(offer);
+                    ServicePrint(service);
+                    break;
+                case OfferType.Rent:
+                    var rent = rentRepository.FindRent(offer);
+                    RentPrint(rent);
+                    break;
+                default:
+                    break;
             }
         }
     }

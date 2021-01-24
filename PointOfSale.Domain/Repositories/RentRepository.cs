@@ -1,4 +1,5 @@
-﻿using PointOfSale.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Domain.Enums;
 using System;
@@ -16,7 +17,7 @@ namespace PointOfSale.Domain.Repositories
 
         public Rent FindRent(Offer offer)
         {
-            return DbContext.Rents.Where(r => r.OfferId == offer.Id).FirstOrDefault();
+            return DbContext.Rents.First(r => r.OfferId == offer.Id);
         }
 
         public ResponseResultType RentAdd(Rent rent)

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
+using PointOfSale.Data.Enums;
 using PointOfSale.Domain.Enums;
+using PointOfSale.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,6 +104,24 @@ namespace PointOfSale.Domain.Repositories
         public ICollection<Category> AllCategories()
         {
             return DbContext.Categories.ToList();
+        }
+
+
+        public ICollection<CountSalesPerCategory> NumberOfSalesPerCategory()
+        { 
+            return DbContext.OfferCategories
+                .Include(o => o.Offer)
+                .ThenInclude(t => t.TraditionalBills.Where(b => !b.Bill.isCancelled))
+                .Include(c => c.Category)
+                .Where(o => o.Offer.OfferType == OfferType.Item)
+                .ToList()
+                .GroupBy(c => c.Category)
+                .Select(g => new CountSalesPerCategory
+                {
+                    NameOfcategory = g.Key.NameOfCategory,
+                    Sales = g.Sum(o => o.Offer.TraditionalBills.Sum(t => t.Quantity))
+                })
+                .ToList();
         }
     }
 }

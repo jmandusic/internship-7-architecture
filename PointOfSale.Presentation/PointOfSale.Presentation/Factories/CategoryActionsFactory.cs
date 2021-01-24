@@ -13,7 +13,7 @@ namespace PointOfSale.Presentation.Factories
 {
     public static class CategoryActionsFactory
     {
-        public static CategoryParentAction GetOfferParentAction()
+        public static CategoryParentAction GetCategoryParentAction()
         {
             var categoryActions = new List<IAction>
             {

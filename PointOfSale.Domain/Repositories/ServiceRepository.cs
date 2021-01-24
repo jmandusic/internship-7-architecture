@@ -16,7 +16,7 @@ namespace PointOfSale.Domain.Repositories
 
         public Service FindService(Offer offer)
         {
-            return DbContext.Services.Where(s => s.OfferId == offer.Id).FirstOrDefault();
+            return DbContext.Services.First(s => s.OfferId == offer.Id);
         }
 
         public ResponseResultType ServiceAdd(Service service)

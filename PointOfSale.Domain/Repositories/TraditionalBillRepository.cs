@@ -1,4 +1,5 @@
-﻿using PointOfSale.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Domain.Enums;
 using System;
@@ -45,6 +46,15 @@ namespace PointOfSale.Domain.Repositories
             SaveChanges();
 
             return DbContext.Bills.Find(billId);
+        }
+
+        public int NumberOfSalesPerItem(Item item)
+        {
+            var sales = DbContext.TraditionalBills
+                .Where(b => b.Bill.isCancelled == false)
+                .Where(t => t.OfferId == item.OfferId)
+                .Sum(t => t.Quantity);
+            return sales;
         }
     }
 }

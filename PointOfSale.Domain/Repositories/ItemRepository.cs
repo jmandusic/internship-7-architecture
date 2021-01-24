@@ -16,7 +16,7 @@ namespace PointOfSale.Domain.Repositories
 
         public Item FindItem(Offer offer)
         {
-            return DbContext.Items.Where(i => i.OfferId == offer.Id).FirstOrDefault();
+            return DbContext.Items.First(i => i.OfferId == offer.Id);
         }
 
         public ResponseResultType ItemAdd(Item item)
@@ -90,6 +90,20 @@ namespace PointOfSale.Domain.Repositories
             }
             return items;
         }
+
+        public ICollection<Item> InventoryReport(string type, int quantity)
+        {
+            if (type == ">")
+            {
+                return DbContext.Items
+                    .Where(i => i.Quantity > quantity)
+                    .ToList();
+            }
+            return DbContext.Items
+                    .Where(i => i.Quantity < quantity)
+                    .ToList();
+        }
+
 
     }
 }

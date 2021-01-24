@@ -1,4 +1,5 @@
-﻿using PointOfSale.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Data.Enums;
 using PointOfSale.Domain.Enums;
@@ -66,6 +67,51 @@ namespace PointOfSale.Domain.Repositories
         public ICollection<SubscriptionBill> AllSubscriptionBills()
         {
             return DbContext.SubscriptionBills.ToList();
+        }
+
+        public decimal ProfitByYear(int year)
+        {
+            return DbContext.Bills
+                .Where(b => b.isCancelled == false)
+                .Where(b => b.PurchasedOn.Year == year)
+                .Sum(b => b.TotalPrice);  
+        }
+
+        public ICollection<Bill> InCertainTimeSpanWithOfferType(DateTime start, DateTime end,
+            string categoryName, int offerType)
+        {
+            if (categoryName is null)
+            {
+                return DbContext.Bills
+                    .Include(b => b.SubscriptionBills)
+                    .ThenInclude(o => o.Offer)
+                    .ThenInclude(oc => oc.OfferCategories.Where(oc => (int)oc.Offer.OfferType == offerType))
+                    .Where(b => b.PurchasedOn > start && b.PurchasedOn < end && !b.isCancelled)
+                    .ToList();
+            }
+            return DbContext.Bills
+                    .Include(b => b.SubscriptionBills)
+                    .ThenInclude(o => o.Offer)
+                    .ThenInclude(oc => oc.OfferCategories.Where(oc => (int)oc.Offer.OfferType == offerType && oc.Category.NameOfCategory == categoryName))
+                    .Where(b => b.PurchasedOn > start && b.PurchasedOn < end && !b.isCancelled)
+                    .ToList();
+        }
+
+        public ICollection<Bill> InCertainTimeSpanWithoutOfferType(DateTime start, DateTime end,
+            string categoryName)
+        {
+            if (categoryName is null)
+            {
+                return DbContext.Bills
+                    .Where(b => b.PurchasedOn > start && b.PurchasedOn < end && !b.isCancelled)
+                    .ToList();
+            }
+            return DbContext.Bills
+                    .Include(b => b.SubscriptionBills)
+                    .ThenInclude(o => o.Offer)
+                    .ThenInclude(oc => oc.OfferCategories.Where(oc => oc.Category.NameOfCategory == categoryName))
+                    .Where(b => b.PurchasedOn > start && b.PurchasedOn < end && !b.isCancelled)
+                    .ToList();
         }
     }
 }
