@@ -1,11 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PointOfSale.Data.Entities;
+﻿using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Domain.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PointOfSale.Domain.Repositories
 {

@@ -1,7 +1,5 @@
 ﻿using PointOfSale.Domain.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PointOfSale.Domain.Factories
 {

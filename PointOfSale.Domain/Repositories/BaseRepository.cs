@@ -1,8 +1,5 @@
 ﻿using PointOfSale.Data.Entities;
 using PointOfSale.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PointOfSale.Domain.Repositories
 {

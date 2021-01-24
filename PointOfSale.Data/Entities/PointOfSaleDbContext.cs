@@ -3,11 +3,8 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Data.Seed;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace PointOfSale.Data.Entities
 {

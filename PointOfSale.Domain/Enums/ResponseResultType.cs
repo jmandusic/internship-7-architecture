@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PointOfSale.Domain.Enums
+﻿namespace PointOfSale.Domain.Enums
 {
     public enum ResponseResultType
     {

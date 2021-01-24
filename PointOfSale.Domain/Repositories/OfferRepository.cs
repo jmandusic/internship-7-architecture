@@ -2,12 +2,9 @@
 using PointOfSale.Data.Entities;
 using PointOfSale.Data.Entities.Models;
 using PointOfSale.Data.Enums;
-using PointOfSale.Domain.Enums;
 using PointOfSale.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PointOfSale.Domain.Repositories
 {

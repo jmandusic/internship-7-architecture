@@ -1,12 +1,7 @@
-﻿using PointOfSale.Data.Entities.Models;
-using PointOfSale.Domain.Repositories;
+﻿using PointOfSale.Domain.Repositories;
 using PointOfSale.Presentation.Abstractions;
-using PointOfSale.Presentation.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Presentation.Actions.Reports
 {
@@ -37,22 +32,17 @@ namespace PointOfSale.Presentation.Actions.Reports
                 Console.WriteLine("No active rents at the moment");
                 Console.ReadLine();
                 Console.Clear();
+                return;
             }
 
             foreach (var bill in bills)
             {
-                foreach (var rent in rents)
-                {
-                    if (rent.OfferId == bill.OfferId)
-                    {
-                        Console.WriteLine($"Rent: {rent.Name} \n" +
-                              $"Start of rent: {bill.StartOfRent:dd.MM.yyyy. HH:mm} \n" +
-                              $"End of rent: {bill.EndOfRent:dd.MM.yyyy. HH:mm} \n" +
-                              $"Customer: {bill.Customer.FirstName} {bill.Customer.LastName} \n" +
-                              $"------------------------------------------------------------ \n" +
-                              $"Transaction: {bill.Bill.PurchasedOn:dd.MM.yyyy. HH:mm}   Total price: {bill.Bill.TotalPrice}\n \n");
-                    }
-                }
+                var rent = _rentRepository.FindRent(bill.Offer);
+
+                Console.WriteLine($"Rent: {rent.Name} \n" +
+                                  $"Customer: {bill.Customer.FirstName} {bill.Customer.LastName}\n" +
+                                  $"Transaction: {bill.Bill.PurchasedOn}\n" +
+                                  $"Total price: {bill.Bill.TotalPrice}\n");
             }
 
             Console.ReadLine();

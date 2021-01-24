@@ -5,7 +5,6 @@ using PointOfSale.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PointOfSale.Domain.Repositories
 {
@@ -32,7 +31,9 @@ namespace PointOfSale.Domain.Repositories
         {
             return DbContext.SubscriptionBills
                  .Include(b => b.Bill)
+                 .Include(c => c.Customer)
                  .Include(o => o.Offer)
+                 .ThenInclude(r => r.Rents)
                  .Where(sb => sb.StartOfRent < DateTime.Now && sb.EndOfRent > DateTime.Now && !sb.Bill.isCancelled)
                  .ToList();
         }

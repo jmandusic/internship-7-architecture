@@ -3,11 +3,7 @@ using PointOfSale.Domain.Repositories;
 using PointOfSale.Presentation.Abstractions;
 using PointOfSale.Presentation.Actions;
 using PointOfSale.Presentation.Actions.OfferActions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Presentation.Factories
 {

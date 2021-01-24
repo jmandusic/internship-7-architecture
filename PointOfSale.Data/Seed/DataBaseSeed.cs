@@ -3,7 +3,6 @@ using PointOfSale.Data.Entities.Models;
 using PointOfSale.Data.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PointOfSale.Data.Seed
 {

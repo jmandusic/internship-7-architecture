@@ -1,11 +1,6 @@
-﻿using PointOfSale.Data.Entities.Models;
-using PointOfSale.Data.Enums;
+﻿using PointOfSale.Data.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Presentation.Helpers
 {

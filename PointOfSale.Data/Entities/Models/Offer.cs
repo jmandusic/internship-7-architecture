@@ -1,7 +1,5 @@
 ﻿using PointOfSale.Data.Enums;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PointOfSale.Data.Entities.Models
 {

@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PointOfSale.Data.Entities;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Text;
 
 namespace PointOfSale.Domain.Factories
 {
